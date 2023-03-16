@@ -1,11 +1,6 @@
-﻿using StockBridge.Dto;
-using System.Configuration;
+﻿using StockBridge.Entry;
 
-//Get Username and Password from config to auth in cars.com
-string username = ConfigurationManager.AppSettings["username"];
-string password = ConfigurationManager.AppSettings["password"];
-
-//Initialize new record for auth purposes
-var credentials = new CredentialsDto(username, password);
-
+//Get configs
+var credentials = ConfigManager.GetCredentials();
+var uri = ConfigManager.GetUri();
 return;
