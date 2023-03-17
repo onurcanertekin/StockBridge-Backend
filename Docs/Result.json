@@ -1,0 +1,1364 @@
+{
+    "AllTesla": {
+        "CarDetail": {
+            "EstimatedMonthlyPayment": "$844/mo*",
+            "SellerContactPhone": "Call (469) 848-2086",
+            "CarBasics": {
+                "ExteriorColor": "Black",
+                "InteriorColor": "Cream",
+                "DriveTrain": "All-wheel Drive",
+                "FuelType": "Electric",
+                "Transmission": "1-Speed Automatic",
+                "Engine": "Electric",
+                "VIN": "5YJSA1E20LF356587",
+                "Stock": "LF356587",
+                "Mileage": "52,271 mi."
+            },
+            "CarFeatures": {
+                "Convenience": [
+                    "Adaptive Cruise Control",
+                    "Heated Steering Wheel",
+                    "Navigation System",
+                    "Power Liftgate"
+                ],
+                "Entertainment": [
+                    "Bluetooth"
+                ],
+                "Exterior": [
+                    "Alloy Wheels"
+                ],
+                "Safety": [
+                    "Backup Camera",
+                    "Brake Assist",
+                    "Lane Departure Warning",
+                    "Stability Control"
+                ],
+                "Seating": [
+                    "Leather Seats",
+                    "Memory Seat"
+                ],
+                "AdditionalPopularFeatures": []
+            },
+            "CarHistory": {
+                "AccidentsOrDamage": "None reported",
+                "FirstOwnerVehicle": "Yes",
+                "PersonelUseOnly": "Yes"
+            },
+            "Uri": "https://www.cars.com/vehicledetail/b74ce020-2469-46b3-b2b5-a940d6e7d0d5/",
+            "Title": "2020 Tesla Model S Long Range",
+            "Price": "$55,800",
+            "DealBadge": "Good Deal",
+            "ImageCount": 46,
+            "Mileage": " 52,271 mi.",
+            "StockType": "Used"
+        },
+        "CarList": [
+            {
+                "Id": "vehicle-card-64c0e517-db77-48b7-8217-25b0256e9e33-sponsored",
+                "IsSponsored": true,
+                "Dealer": {
+                    "Name": "Volkswagen of Palm Springs",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/64c0e517-db77-48b7-8217-25b0256e9e33/",
+                "Title": "2021 Tesla Model X Long Range",
+                "Price": "$80,887",
+                "DealBadge": "Good Deal",
+                "ImageCount": 27,
+                "Mileage": "26,813 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-e48c9372-b7db-43aa-92b7-b86e12dc19a7",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "eLeaseReturns.com",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/e48c9372-b7db-43aa-92b7-b86e12dc19a7/",
+                "Title": "2022 Tesla Model Y Long Range",
+                "Price": "$59,995",
+                "DealBadge": "Good Deal",
+                "ImageCount": 68,
+                "Mileage": "823 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-0442d6ed-77db-475f-9dde-995bfaca0ce1",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "AutoNation Toyota Hayward",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/0442d6ed-77db-475f-9dde-995bfaca0ce1/",
+                "Title": "2021 Tesla Model Y Standard Range",
+                "Price": "$41,955",
+                "DealBadge": "Good Deal",
+                "ImageCount": 20,
+                "Mileage": "47,342 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-a3e17d5d-7b46-45ed-bc7c-d2af5f076e9e",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Maita Toyota",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/a3e17d5d-7b46-45ed-bc7c-d2af5f076e9e/",
+                "Title": "2022 Tesla Model Y Performance",
+                "Price": "$57,955",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 20,
+                "Mileage": "12,341 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-e4e474f8-a582-4288-ae57-90d6cb9f1102",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Glendale Nissan",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/e4e474f8-a582-4288-ae57-90d6cb9f1102/",
+                "Title": "2018 Tesla Model X 100D",
+                "Price": "$62,494",
+                "DealBadge": "Good Deal",
+                "ImageCount": 21,
+                "Mileage": "33,951 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-9b591223-6688-456b-8ec8-346f35ca764c",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "CJ Auto Group",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/9b591223-6688-456b-8ec8-346f35ca764c/",
+                "Title": "2021 Tesla Model Y Performance",
+                "Price": "$54,590",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 29,
+                "Mileage": "9,883 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-5e8a2622-5870-431c-a3c5-004eab2fd7f9",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Downey Hyundai",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/5e8a2622-5870-431c-a3c5-004eab2fd7f9/",
+                "Title": "2021 Tesla Model S Plaid",
+                "Price": "$92,899",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 24,
+                "Mileage": "6,630 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-e7ec94ca-8787-421e-acc9-a7f0ece18e82",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "SC Motors II",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/e7ec94ca-8787-421e-acc9-a7f0ece18e82/",
+                "Title": "2022 Tesla Model Y Long Range",
+                "Price": "$54,988",
+                "DealBadge": "Great Deal",
+                "ImageCount": 19,
+                "Mileage": "971 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-858cd79a-9fe0-4348-a0bc-d9158148879b",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Citrus Motors Kia",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/858cd79a-9fe0-4348-a0bc-d9158148879b/",
+                "Title": "2016 Tesla Model X 60D",
+                "Price": "$36,988",
+                "DealBadge": "Good Deal",
+                "ImageCount": 31,
+                "Mileage": "119,211 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-c283cf70-33a7-4514-992c-7a42a86ded43",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Pacific Auto Center - Costa Mesa",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/c283cf70-33a7-4514-992c-7a42a86ded43/",
+                "Title": "2022 Tesla Model S Base",
+                "Price": "$76,995",
+                "DealBadge": "Great Deal",
+                "ImageCount": 52,
+                "Mileage": "21,032 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-2646c555-baea-4880-a4e6-52406a9c0546",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Paradise Automotive Group",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/2646c555-baea-4880-a4e6-52406a9c0546/",
+                "Title": "2016 Tesla Model S 70D",
+                "Price": "$33,985",
+                "DealBadge": "Good Deal",
+                "ImageCount": 25,
+                "Mileage": "72,661 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-624a3e11-0590-46a7-aa1d-3bf5508acf9d",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Doug",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/624a3e11-0590-46a7-aa1d-3bf5508acf9d/",
+                "Title": "2020 Tesla Model X Long Range",
+                "Price": "$79,995",
+                "DealBadge": "Good Deal",
+                "ImageCount": 13,
+                "Mileage": "35,000 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-a895b1d4-305f-45da-8639-394d9ef4c9fd",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Spady Auto Group of Scottsdale",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/a895b1d4-305f-45da-8639-394d9ef4c9fd/",
+                "Title": "2022 Tesla Model X Long Range AWD",
+                "Price": "$95,900",
+                "DealBadge": "Great Deal",
+                "ImageCount": 24,
+                "Mileage": "3,556 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-d2eed100-1d07-41c2-ab55-b2c0e85d1b4b",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Hertz Car Sales Scottsdale",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/d2eed100-1d07-41c2-ab55-b2c0e85d1b4b/",
+                "Title": "2022 Tesla Model Y Long Range",
+                "Price": "$51,900",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 39,
+                "Mileage": "15,635 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-4767d6f9-2de2-4955-9703-e7265fd81ed2",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Boyko Motors",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/4767d6f9-2de2-4955-9703-e7265fd81ed2/",
+                "Title": "2021 Tesla Model S Plaid",
+                "Price": "$94,995",
+                "DealBadge": "Good Deal",
+                "ImageCount": 44,
+                "Mileage": "6,449 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-c9aad8d4-128d-4c53-9492-4b57eba86e63",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Auto Quest",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/c9aad8d4-128d-4c53-9492-4b57eba86e63/",
+                "Title": "2020 Tesla Model Y Performance Dual Motor All-Wheel Drive",
+                "Price": "$49,748",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 29,
+                "Mileage": "68,538 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-3f5abbfe-8167-40b9-82e0-8845673628fe",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "BMW Seattle",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/3f5abbfe-8167-40b9-82e0-8845673628fe/",
+                "Title": "2021 Tesla Model 3 Standard Range Plus",
+                "Price": "$39,888",
+                "DealBadge": "Great Deal",
+                "ImageCount": 31,
+                "Mileage": "13,000 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-26f8fe5d-47d0-4de9-906e-9ccedbc97093",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Lee Johnson Chevrolet",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/26f8fe5d-47d0-4de9-906e-9ccedbc97093/",
+                "Title": "2022 Tesla Model X Base",
+                "Price": "$96,999",
+                "DealBadge": "Good Deal",
+                "ImageCount": 22,
+                "Mileage": "3,724 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-11e8d2db-1605-4c62-a6b8-0e0b36fcac94",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Brotherton Cadillac NW",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/11e8d2db-1605-4c62-a6b8-0e0b36fcac94/",
+                "Title": "2018 Tesla Model X 100D",
+                "Price": "$58,881",
+                "DealBadge": "Good Deal",
+                "ImageCount": 35,
+                "Mileage": "49,623 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-207ad15d-30ad-4c03-a44a-0d18bf2b3c4d",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Springs Automotive Group",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/207ad15d-30ad-4c03-a44a-0d18bf2b3c4d/",
+                "Title": "2022 Tesla Model Y Long Range",
+                "Price": "$53,297",
+                "DealBadge": "Good Deal",
+                "ImageCount": 26,
+                "Mileage": "3,075 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-83711d5b-58e4-4fef-930b-467b916e0ea7",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Rickenbaugh Cadillac Volvo Cars",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/83711d5b-58e4-4fef-930b-467b916e0ea7/",
+                "Title": "2019 Tesla Model 3 ",
+                "Price": "$34,000",
+                "DealBadge": "Good Deal",
+                "ImageCount": 30,
+                "Mileage": "24,726 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-96ddea70-d8fe-4111-b495-9ae4aa6c5159",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "AutoNation Chrysler Dodge Jeep Ram North Richland Hills",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/96ddea70-d8fe-4111-b495-9ae4aa6c5159/",
+                "Title": "2020 Tesla Model X Performance",
+                "Price": "$79,985",
+                "DealBadge": "Great Deal",
+                "ImageCount": 27,
+                "Mileage": "14,777 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-110e5b58-a2cd-43fd-849b-8435ff2c9a90",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Lewisville Volkswagen",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/110e5b58-a2cd-43fd-849b-8435ff2c9a90/",
+                "Title": "2022 Tesla Model Y Long Range",
+                "Price": "$55,280",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 24,
+                "Mileage": "1,536 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-b74ce020-2469-46b3-b2b5-a940d6e7d0d5",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Auto Centrix",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/b74ce020-2469-46b3-b2b5-a940d6e7d0d5/",
+                "Title": "2020 Tesla Model S Long Range",
+                "Price": "$55,800",
+                "DealBadge": "Good Deal",
+                "ImageCount": 46,
+                "Mileage": "52,271 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-f05c4de1-a7a9-4590-9e48-7cb8af1303f5",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Carousel Online",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/f05c4de1-a7a9-4590-9e48-7cb8af1303f5/",
+                "Title": "2021 Tesla Model Y Long Range",
+                "Price": "$44,999",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 31,
+                "Mileage": "35,500 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-09570a9e-77e0-4dbe-a67c-171ffc7283da",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Giancarlos",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/09570a9e-77e0-4dbe-a67c-171ffc7283da/",
+                "Title": "2022 Tesla Model Y Long Range",
+                "Price": "$55,500",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 7,
+                "Mileage": "5,500 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-477e1980-2af7-44be-9e5b-fd922101e898",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Bluebonnet Ford",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/477e1980-2af7-44be-9e5b-fd922101e898/",
+                "Title": "2017 Tesla Model S 75D",
+                "Price": "$36,995",
+                "DealBadge": "Great Deal",
+                "ImageCount": 21,
+                "Mileage": "61,741 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-c0bb1e35-f80d-4f3f-8065-5f43a6e4df25",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Main Street Buick GMC",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/c0bb1e35-f80d-4f3f-8065-5f43a6e4df25/",
+                "Title": "2021 Tesla Model S Long Range",
+                "Price": "$73,900",
+                "DealBadge": "Good Deal",
+                "ImageCount": 43,
+                "Mileage": "30,001 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-ce58f64b-9589-46f8-b2b6-f338b368a09a",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Woody's Dodge Jeep Chrysler RAM",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/ce58f64b-9589-46f8-b2b6-f338b368a09a/",
+                "Title": "2018 Tesla Model 3 Long Range",
+                "Price": "$39,756",
+                "DealBadge": "Good Deal",
+                "ImageCount": 81,
+                "Mileage": "30,607 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-378dbbcf-709e-41ff-97d6-759a076d1d5d",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "McLarty Daniel Buick GMC",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/378dbbcf-709e-41ff-97d6-759a076d1d5d/",
+                "Title": "2021 Tesla Model S Plaid",
+                "Price": "$94,990",
+                "DealBadge": "Good Deal",
+                "ImageCount": 30,
+                "Mileage": "8,011 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-f0d452d4-293f-4225-a72b-3380ede08256",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Chevrolet of Wayzata",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/f0d452d4-293f-4225-a72b-3380ede08256/",
+                "Title": "2018 Tesla Model 3 Mid Range",
+                "Price": "$29,800",
+                "DealBadge": "Great Deal",
+                "ImageCount": 27,
+                "Mileage": "40,308 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-f08d3393-0cfa-4285-83e4-d9294f647dc4",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Jaguar Land Rover Minneapolis",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/f08d3393-0cfa-4285-83e4-d9294f647dc4/",
+                "Title": "2020 Tesla Model X Long Range Plus",
+                "Price": "$69,999",
+                "DealBadge": "Great Deal",
+                "ImageCount": 40,
+                "Mileage": "43,752 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-1cd6fcff-029d-45bc-b896-db3575160337",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Walser Experienced Autos Burnsville",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/1cd6fcff-029d-45bc-b896-db3575160337/",
+                "Title": "2017 Tesla Model S ",
+                "Price": "$33,399",
+                "DealBadge": "Great Deal",
+                "ImageCount": 28,
+                "Mileage": "87,811 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-d17c1e56-2a2b-49a0-80d1-4ed08c0924c9",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Walser Polar Mazda",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/d17c1e56-2a2b-49a0-80d1-4ed08c0924c9/",
+                "Title": "2021 Tesla Model Y Long Range",
+                "Price": "$46,998",
+                "DealBadge": "Great Deal",
+                "ImageCount": 32,
+                "Mileage": "20,013 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-76b5c7a7-3f93-4614-8b2a-0cb1ddfb9c66",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Rochester Mazda",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/76b5c7a7-3f93-4614-8b2a-0cb1ddfb9c66/",
+                "Title": "2022 Tesla Model Y Long Range",
+                "Price": "$54,699",
+                "DealBadge": "No Deal",
+                "ImageCount": 36,
+                "Mileage": "3,626 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-72ae1344-0971-4268-bb2f-865d8c6a404e",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Sterling McCall Chevrolet",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/72ae1344-0971-4268-bb2f-865d8c6a404e/",
+                "Title": "2021 Tesla Model S Plaid",
+                "Price": "$88,367",
+                "DealBadge": "Good Deal",
+                "ImageCount": 32,
+                "Mileage": "13,317 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-50a03bd5-e9ea-4141-8129-642b38039379",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Texas Auto North",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/50a03bd5-e9ea-4141-8129-642b38039379/",
+                "Title": "2020 Tesla Model 3 Standard",
+                "Price": "$35,995",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 55,
+                "Mileage": "32,196 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-26a3aad4-9fc5-4c59-8133-bb5ee239c760",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Granger Chevrolet",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/26a3aad4-9fc5-4c59-8133-bb5ee239c760/",
+                "Title": "2022 Tesla Model 3 Long Range",
+                "Price": "$44,933",
+                "DealBadge": "No Deal",
+                "ImageCount": 16,
+                "Mileage": "2,334 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-111ceb6a-756a-40cf-967d-37ff3a1a7648",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Van Horn Chrysler Dodge Jeep Ram of Stoughton",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/111ceb6a-756a-40cf-967d-37ff3a1a7648/",
+                "Title": "2018 Tesla Model 3 Long Range",
+                "Price": "$32,610",
+                "DealBadge": "Great Deal",
+                "ImageCount": 35,
+                "Mileage": "40,785 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-60dac1a7-a4f3-4247-b3ad-a7620c5315ce",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Mendoza Ford",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/60dac1a7-a4f3-4247-b3ad-a7620c5315ce/",
+                "Title": "2021 Tesla Model S Plaid",
+                "Price": "$88,447",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 43,
+                "Mileage": "40,021 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-68857a62-7813-4b18-b533-5ccce908c9ea",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Dempsey Dodge Chrysler Jeep RAM",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/68857a62-7813-4b18-b533-5ccce908c9ea/",
+                "Title": "2022 Tesla Model Y Performance",
+                "Price": "$56,857",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 28,
+                "Mileage": "8,377 mi.",
+                "StockType": "Used"
+            }
+        ],
+        "NotableHighlights": {
+            "Deal": "This car presents a good buying opportunity. Our analysis compares this car's price, features, and condition with similar 2020 Model S.",
+            "HomeDelivery": "Looking to have this car delivered to your home? This dealership offers home delivery on some or all of its cars. Contact the dealership with our tools to get details such as qualifying cars, test drive options, and any applicable fees.",
+            "VirtualAppointments": "You can get more information about this car from your couch through a virtual appointment! Use our tools to contact the dealership to schedule a video consultation. A video walkaround of this car may be available upon request."
+        }
+    },
+    "TeslaModelX": {
+        "CarDetail": {
+            "EstimatedMonthlyPayment": "$1,172/mo*",
+            "SellerContactPhone": "Call (872) 281-8075",
+            "CarBasics": {
+                "ExteriorColor": "Deep Blue Metallic",
+                "InteriorColor": "White/Black",
+                "DriveTrain": "All-wheel Drive",
+                "FuelType": "Electric",
+                "Transmission": "Automatic",
+                "Engine": "Electric Motor",
+                "VIN": "5YJXCAE43LF217829",
+                "Stock": "P13547",
+                "Mileage": "27,577 mi."
+            },
+            "CarFeatures": {
+                "Convenience": [
+                    "Adaptive Cruise Control",
+                    "Heated Seats",
+                    "Heated Steering Wheel",
+                    "Keyless Start",
+                    "Navigation System",
+                    "Power Liftgate"
+                ],
+                "Entertainment": [
+                    "Bluetooth",
+                    "HomeLink",
+                    "Premium Sound System",
+                    "USB Port"
+                ],
+                "Exterior": [
+                    "Alloy Wheels",
+                    "Sunroof/Moonroof",
+                    "Tow Hitch"
+                ],
+                "Safety": [
+                    "Backup Camera",
+                    "Blind Spot Monitor",
+                    "Brake Assist",
+                    "LED Headlights",
+                    "Lane Departure Warning",
+                    "Rear Cross Traffic Alert",
+                    "Stability Control"
+                ],
+                "Seating": [
+                    "Leather Seats",
+                    "Memory Seat"
+                ],
+                "AdditionalPopularFeatures": []
+            },
+            "CarHistory": {
+                "AccidentsOrDamage": "None reported",
+                "FirstOwnerVehicle": "Yes",
+                "PersonelUseOnly": "Yes"
+            },
+            "Uri": "https://www.cars.com/vehicledetail/ad089ec0-5f40-4cea-8381-eb19aa113dca/",
+            "Title": "2020 Tesla Model X Performance Dual Motor All-Wheel Drive",
+            "Price": "$77,449",
+            "DealBadge": "Good Deal | $1,314 under",
+            "ImageCount": 31,
+            "Mileage": " 27,577 mi.",
+            "StockType": "Used"
+        },
+        "CarList": [
+            {
+                "Id": "vehicle-card-64c0e517-db77-48b7-8217-25b0256e9e33-sponsored",
+                "IsSponsored": true,
+                "Dealer": {
+                    "Name": "Volkswagen of Palm Springs",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/64c0e517-db77-48b7-8217-25b0256e9e33/",
+                "Title": "2021 Tesla Model X Long Range",
+                "Price": "$80,887",
+                "DealBadge": "Good Deal",
+                "ImageCount": 27,
+                "Mileage": "26,813 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-e4e474f8-a582-4288-ae57-90d6cb9f1102",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Glendale Nissan",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/e4e474f8-a582-4288-ae57-90d6cb9f1102/",
+                "Title": "2018 Tesla Model X 100D",
+                "Price": "$62,494",
+                "DealBadge": "Good Deal",
+                "ImageCount": 21,
+                "Mileage": "33,951 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-858cd79a-9fe0-4348-a0bc-d9158148879b",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Citrus Motors Kia",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/858cd79a-9fe0-4348-a0bc-d9158148879b/",
+                "Title": "2016 Tesla Model X 60D",
+                "Price": "$36,988",
+                "DealBadge": "Good Deal",
+                "ImageCount": 31,
+                "Mileage": "119,211 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-c5be2bab-b06e-4a92-aaf0-c955768e165e",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Paradise Automotive Group",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/c5be2bab-b06e-4a92-aaf0-c955768e165e/",
+                "Title": "2016 Tesla Model X P90D",
+                "Price": "$47,985",
+                "DealBadge": "Good Deal",
+                "ImageCount": 33,
+                "Mileage": "70,169 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-624a3e11-0590-46a7-aa1d-3bf5508acf9d",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Doug",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/624a3e11-0590-46a7-aa1d-3bf5508acf9d/",
+                "Title": "2020 Tesla Model X Long Range",
+                "Price": "$79,995",
+                "DealBadge": "Good Deal",
+                "ImageCount": 13,
+                "Mileage": "35,000 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-a895b1d4-305f-45da-8639-394d9ef4c9fd",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Spady Auto Group of Scottsdale",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/a895b1d4-305f-45da-8639-394d9ef4c9fd/",
+                "Title": "2022 Tesla Model X Long Range AWD",
+                "Price": "$95,900",
+                "DealBadge": "Great Deal",
+                "ImageCount": 24,
+                "Mileage": "3,556 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-26f8fe5d-47d0-4de9-906e-9ccedbc97093",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Lee Johnson Chevrolet",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/26f8fe5d-47d0-4de9-906e-9ccedbc97093/",
+                "Title": "2022 Tesla Model X Base",
+                "Price": "$96,999",
+                "DealBadge": "Good Deal",
+                "ImageCount": 22,
+                "Mileage": "3,724 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-11e8d2db-1605-4c62-a6b8-0e0b36fcac94",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Brotherton Cadillac NW",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/11e8d2db-1605-4c62-a6b8-0e0b36fcac94/",
+                "Title": "2018 Tesla Model X 100D",
+                "Price": "$58,881",
+                "DealBadge": "Good Deal",
+                "ImageCount": 35,
+                "Mileage": "49,623 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-d1f02220-9512-40d1-9a44-8c3bb8fc4af7",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Bob Penkhus Volvo, Mazda Inc.",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/d1f02220-9512-40d1-9a44-8c3bb8fc4af7/",
+                "Title": "2017 Tesla Model X 100D",
+                "Price": "$47,999",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 35,
+                "Mileage": "103,802 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-96ddea70-d8fe-4111-b495-9ae4aa6c5159",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "AutoNation Chrysler Dodge Jeep Ram North Richland Hills",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/96ddea70-d8fe-4111-b495-9ae4aa6c5159/",
+                "Title": "2020 Tesla Model X Performance",
+                "Price": "$79,985",
+                "DealBadge": "Great Deal",
+                "ImageCount": 27,
+                "Mileage": "14,777 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-f08d3393-0cfa-4285-83e4-d9294f647dc4",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Jaguar Land Rover Minneapolis",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/f08d3393-0cfa-4285-83e4-d9294f647dc4/",
+                "Title": "2020 Tesla Model X Long Range Plus",
+                "Price": "$69,999",
+                "DealBadge": "Great Deal",
+                "ImageCount": 40,
+                "Mileage": "43,752 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-9bfa26bb-5b52-4a19-b3df-b4f3b23a03ce",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Mercedes-Benz of St. Charles",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/9bfa26bb-5b52-4a19-b3df-b4f3b23a03ce/",
+                "Title": "2022 Tesla Model X ",
+                "Price": "$96,893",
+                "DealBadge": "Great Deal",
+                "ImageCount": 24,
+                "Mileage": "7,101 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-92ee8d1b-e737-41af-a6da-b2d084e64471",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Mercedes-Benz of Westmont",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/92ee8d1b-e737-41af-a6da-b2d084e64471/",
+                "Title": "2016 Tesla Model X 90D",
+                "Price": "$45,595",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 25,
+                "Mileage": "54,065 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-df5cf550-df5c-499f-9e3e-afe2c79b408b",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Chicago Auto Warehouse",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/df5cf550-df5c-499f-9e3e-afe2c79b408b/",
+                "Title": "2016 Tesla Model X 90D",
+                "Price": "$51,961",
+                "DealBadge": "Good Deal",
+                "ImageCount": 57,
+                "Mileage": "26,237 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-bf73bdae-64a6-4ca3-a67d-a3d8c8fcaf9f",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Motorpoint Roswell",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/bf73bdae-64a6-4ca3-a67d-a3d8c8fcaf9f/",
+                "Title": "2019 Tesla Model X Long Range",
+                "Price": "$65,999",
+                "DealBadge": "Good Deal",
+                "ImageCount": 23,
+                "Mileage": "42,329 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-d8bc21ec-bd10-4aae-bcf7-58197a540fc3",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Motorpoint Roswell",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/d8bc21ec-bd10-4aae-bcf7-58197a540fc3/",
+                "Title": "2019 Tesla Model X Long Range",
+                "Price": "$69,586",
+                "DealBadge": "Great Deal",
+                "ImageCount": 25,
+                "Mileage": "28,079 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-28e75c5f-fc2c-4c3d-8085-72c4029ff921",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Capital Ford",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/28e75c5f-fc2c-4c3d-8085-72c4029ff921/",
+                "Title": "2022 Tesla Model X ",
+                "Price": "$93,990",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 38,
+                "Mileage": "10,849 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-b4cfb188-c4cc-47f4-8562-3502cc3e4a26",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "MemberCar",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/b4cfb188-c4cc-47f4-8562-3502cc3e4a26/",
+                "Title": "2021 Tesla Model X Long Range Plus",
+                "Price": "$78,981",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 19,
+                "Mileage": "20,739 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-b79dcb3f-834a-473a-8563-b38640275232",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Alexandria VW",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/b79dcb3f-834a-473a-8563-b38640275232/",
+                "Title": "2019 Tesla Model X Long Range",
+                "Price": "$57,500",
+                "DealBadge": "Great Deal",
+                "ImageCount": 26,
+                "Mileage": "42,508 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-1bfe2410-50f7-4b04-8a25-69223bca8372",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "J &amp; S Autohaus",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/1bfe2410-50f7-4b04-8a25-69223bca8372/",
+                "Title": "2019 Tesla Model X Long Range",
+                "Price": "$58,995",
+                "DealBadge": "Great Deal",
+                "ImageCount": 58,
+                "Mileage": "48,707 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-15a4dddb-6850-4caf-99f6-65ec93c06cf9",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Lexus of Palm Beach",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/15a4dddb-6850-4caf-99f6-65ec93c06cf9/",
+                "Title": "2021 Tesla Model X Long Range Plus",
+                "Price": "$79,995",
+                "DealBadge": "Great Deal",
+                "ImageCount": 25,
+                "Mileage": "12,214 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-df43780f-09ef-4cd8-bc5a-fca802cae0f5",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Sacramento Chrysler Dodge Jeep Ram",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/df43780f-09ef-4cd8-bc5a-fca802cae0f5/",
+                "Title": "2020 Tesla Model X Long Range",
+                "Price": "$67,499",
+                "DealBadge": "Great Deal",
+                "ImageCount": 27,
+                "Mileage": "41,794 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-56190cf2-d349-42c9-9f02-3102a90ee7a3",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Lithia Subaru of Fresno",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/56190cf2-d349-42c9-9f02-3102a90ee7a3/",
+                "Title": "2020 Tesla Model X Long Range",
+                "Price": "$69,245",
+                "DealBadge": "Great Deal",
+                "ImageCount": 45,
+                "Mileage": "28,306 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-577a7969-6442-4062-90b3-dea2e54c2116",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Auto Quest",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/577a7969-6442-4062-90b3-dea2e54c2116/",
+                "Title": "2018 Tesla Model X 100D",
+                "Price": "$65,988",
+                "DealBadge": "Good Deal",
+                "ImageCount": 29,
+                "Mileage": "32,667 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-4846ebda-c8dc-42cb-acdc-ce494391fa51",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "ZAG Motors Everett",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/4846ebda-c8dc-42cb-acdc-ce494391fa51/",
+                "Title": "2016 Tesla Model X 90D",
+                "Price": "$51,695",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 46,
+                "Mileage": "60,733 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-bf976979-8ae9-4fd1-be10-3465fa4b171e",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Exotic Motorsports of Oklahoma",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/bf976979-8ae9-4fd1-be10-3465fa4b171e/",
+                "Title": "2020 Tesla Model X Long Range",
+                "Price": "$69,995",
+                "DealBadge": "No Deal",
+                "ImageCount": 67,
+                "Mileage": "43,823 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-263eeed7-1f25-4f00-8409-e006c7d1288e",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Auto Web Expo",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/263eeed7-1f25-4f00-8409-e006c7d1288e/",
+                "Title": "2018 Tesla Model X 75D",
+                "Price": "$55,899",
+                "DealBadge": "Great Deal",
+                "ImageCount": 71,
+                "Mileage": "36,074 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-5bd1a563-d95f-4590-845b-0a6eb11f69d6",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Ken Vance Motors",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/5bd1a563-d95f-4590-845b-0a6eb11f69d6/",
+                "Title": "2016 Tesla Model X 90D",
+                "Price": "$45,722",
+                "DealBadge": "Great Deal",
+                "ImageCount": 44,
+                "Mileage": "47,348 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-ab3ab974-ec6f-4b73-8054-0d61abca11dd",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Jimmy Gray Chevrolet",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/ab3ab974-ec6f-4b73-8054-0d61abca11dd/",
+                "Title": "2020 Tesla Model X Long Range",
+                "Price": "$64,000",
+                "DealBadge": "Good Deal",
+                "ImageCount": 32,
+                "Mileage": "65,634 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-bae4dc42-2767-4066-93f5-5d6354a9e8b8",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Mercedes-Benz of St. Charles",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/bae4dc42-2767-4066-93f5-5d6354a9e8b8/",
+                "Title": "2018 Tesla Model X 75D",
+                "Price": "$48,893",
+                "DealBadge": "Great Deal",
+                "ImageCount": 25,
+                "Mileage": "55,230 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-7ee3d1c5-12f1-4546-93fc-b152e6bc3d70",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Gordie Boucher Lincoln of West Allis",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/7ee3d1c5-12f1-4546-93fc-b152e6bc3d70/",
+                "Title": "2020 Tesla Model X Long Range",
+                "Price": "$73,995",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 25,
+                "Mileage": "27,375 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-b00ead0a-7797-40c8-b90f-efc6d39bb659",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Schaumburg Kia",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/b00ead0a-7797-40c8-b90f-efc6d39bb659/",
+                "Title": "2016 Tesla Model X P90D",
+                "Price": "$53,455",
+                "DealBadge": "Good Deal",
+                "ImageCount": 36,
+                "Mileage": "27,056 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-e759d0aa-86f4-4c45-ba31-751ae417d49a",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Auto Gallery Chicago",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/e759d0aa-86f4-4c45-ba31-751ae417d49a/",
+                "Title": "2018 Tesla Model X P100D",
+                "Price": "$65,990",
+                "DealBadge": "Good Deal",
+                "ImageCount": 34,
+                "Mileage": "46,529 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-ac9316dc-91c0-431c-a47b-f0e7b07db8a7",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Current Automotive",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/ac9316dc-91c0-431c-a47b-f0e7b07db8a7/",
+                "Title": "2018 Tesla Model X P100D",
+                "Price": "$62,990",
+                "DealBadge": "Great Deal",
+                "ImageCount": 46,
+                "Mileage": "50,216 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-ad089ec0-5f40-4cea-8381-eb19aa113dca",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Midway Dodge",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/ad089ec0-5f40-4cea-8381-eb19aa113dca/",
+                "Title": "2020 Tesla Model X Performance Dual Motor All-Wheel Drive",
+                "Price": "$77,449",
+                "DealBadge": "Good Deal",
+                "ImageCount": 31,
+                "Mileage": "27,577 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-23c81843-6213-4ff2-bbb7-b476fbaf3e6d",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Auto Boutique",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/23c81843-6213-4ff2-bbb7-b476fbaf3e6d/",
+                "Title": "2020 Tesla Model X Long Range Plus",
+                "Price": "$65,000",
+                "DealBadge": "Great Deal",
+                "ImageCount": 32,
+                "Mileage": "43,736 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-7d98ec2d-ed7e-492a-9407-7f35f1032683",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Motorpoint Roswell",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/7d98ec2d-ed7e-492a-9407-7f35f1032683/",
+                "Title": "2019 Tesla Model X Long Range",
+                "Price": "$62,999",
+                "DealBadge": "Good Deal",
+                "ImageCount": 20,
+                "Mileage": "36,479 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-239061ca-6431-40f0-b74f-b47acd2511fc",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Astorg Auto of Charleston",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/239061ca-6431-40f0-b74f-b47acd2511fc/",
+                "Title": "2016 Tesla Model X ",
+                "Price": "$48,993",
+                "DealBadge": "Great Deal",
+                "ImageCount": 17,
+                "Mileage": "45,018 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-cb791013-21c2-4b26-a730-6140662bc99f",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Porsche Chantilly",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/cb791013-21c2-4b26-a730-6140662bc99f/",
+                "Title": "2019 Tesla Model X Long Range",
+                "Price": "$58,500",
+                "DealBadge": "Fair Deal",
+                "ImageCount": 33,
+                "Mileage": "46,599 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-a6039ac1-9d70-4fa2-8585-54430e72201d",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Fred's Executive Auto",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/a6039ac1-9d70-4fa2-8585-54430e72201d/",
+                "Title": "2019 Tesla Model X 75D",
+                "Price": "$55,997",
+                "DealBadge": "Great Deal",
+                "ImageCount": 34,
+                "Mileage": "38,801 mi.",
+                "StockType": "Used"
+            },
+            {
+                "Id": "vehicle-card-0ab8a1c8-3396-4832-84b1-abf37dc37f37",
+                "IsSponsored": false,
+                "Dealer": {
+                    "Name": "Fred's Executive Auto",
+                    "Rating": 0.0
+                },
+                "Uri": "https://cars.com/vehicledetail/0ab8a1c8-3396-4832-84b1-abf37dc37f37/",
+                "Title": "2019 Tesla Model X Long Range",
+                "Price": "$60,997",
+                "DealBadge": "Great Deal",
+                "ImageCount": 32,
+                "Mileage": "43,172 mi.",
+                "StockType": "Used"
+            }
+        ],
+        "NotableHighlights": {
+            "Deal": "This car presents a good buying opportunity, priced at $1,314 under market. Our analysis compares this car's price, features, and condition with similar 2020 Model Xs.",
+            "HomeDelivery": "Looking to have this car delivered to your home? This dealership offers home delivery on some or all of its cars. Contact the dealership with our tools to get details such as qualifying cars, test drive options, and any applicable fees.",
+            "VirtualAppointments": "You can get more information about this car from your couch through a virtual appointment! Use our tools to contact the dealership to schedule a video consultation. A video walkaround of this car may be available upon request."
+        }
+    }
+}
