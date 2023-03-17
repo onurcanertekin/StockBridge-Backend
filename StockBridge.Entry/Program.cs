@@ -5,7 +5,8 @@ using StockBridge.Entry;
 
 internal class Program
 {
-    private static CredentialsDto credentials = ConfigManager.GetCredentials();
+    private static CredentialsDto _credentials = ConfigManager.GetCredentials();
+    private static List<CarDto> _cars = new();
 
     private static async Task Main(string[] args)
     {
@@ -45,6 +46,8 @@ internal class Program
     /// <returns></returns>
     private static async Task GetCarsResult(ChromiumWebBrowser browser)
     {
+        HandleConsole.AddStatus(true, "Firts Page Cars Trying To Get And Parse");
+
         var script = "(function() { var els = document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]'); return Array.from(els).map(el => el.outerHTML); })();";
 
         //TODO: will try to retrive data as html element but until then hard coded string will help this parse...
@@ -56,8 +59,85 @@ internal class Program
         {
             foreach (var singleCar in allCarsInFirstPage.Result as List<object>)
             {
+                var carData = Convert.ToString(singleCar);
+                var car = ParseCarDataFromString(carData);
+                _cars.Add(car);
             }
         }
+        HandleConsole.AddStatus(true, $"In First Page {_cars.Count} Amount Of Car Added To List");
+
+        //Click on second page pagination item
+        var goToSecondPage = await browser.EvaluateScriptAsync("document.querySelector('[id=\"pagination-direct-link-2\"]').click()");
+        HandleConsole.AddStatus(goToSecondPage.Success, $"Second Page Clicked");
+
+        //Wait until page refresh ok
+        //await WaitForPageLoadEnd(browser, onlyFrameLoad: true);
+        Thread.Sleep(1000);
+        //Use same script as page one to fetch all cars in this page.
+        var allCarsInSecondPage = await browser.EvaluateScriptAsync(script);
+        if (allCarsInSecondPage.Success && allCarsInSecondPage.Result != null)
+        {
+            foreach (var singleCar in allCarsInSecondPage.Result as List<object>)
+            {
+                var carData = Convert.ToString(singleCar);
+                var car = ParseCarDataFromString(carData);
+                _cars.Add(car);
+            }
+        }
+        HandleConsole.AddStatus(true, $"In Total Cars Amount In List Is: {_cars.Count}");
+    }
+
+    /// <summary>
+    /// Bad string parse coding.
+    /// </summary>
+    /// <remarks>TODO: will try to get datas from browser.</remarks>
+    /// <param name="singleCar"></param>
+    /// <returns></returns>
+    private static CarDto ParseCarDataFromString(string singleCar)
+    {
+        //Get image count
+        short.TryParse(singleCar.Split("cars-filmstrip totalcount=\"")[1].Split("\"")[0], out short imageCount);
+
+        //Get dealer rating
+        decimal dealerRating = 0;
+        if (singleCar.Split("span class=\"sds-rating__count\">").Length > 2)
+            decimal.TryParse(singleCar.Split("span class=\"sds-rating__count\">")[1].Split("</span>")[0], out dealerRating);
+
+        //Get dealer name
+        string dealerName = string.Empty;
+        if (singleCar.Split("<div class=\"dealer-name\">").Length > 1)
+            dealerName = singleCar.Split("<div class=\"dealer-name\">")[1].Split("<strong>")[1].Split("</strong>")[0];
+        else
+            dealerName = singleCar.Split("<div class=\"seller-name\">")[1].Split("<strong>")[1].Split("</strong>")[0];
+        //Get deal badge
+        string dealBadge = string.Empty;
+        if (singleCar.Split("class=\"sds-badge__label\">").Length > 1)
+            dealBadge = singleCar.Split("class=\"sds-badge__label\">")[1].Split("<span ")[0];
+        else
+            dealBadge = "No Deal";
+        //Get car element's Id attr.
+        string id = singleCar.Split("id=\"")[1].Split("\"")[0];
+        HandleConsole.AddStatus(true, id);
+
+        CarDto result = new()
+        {
+            Id = id,
+            Uri = ConfigManager.GetUri().SiteUri + singleCar.Split("<a href=\"/")[1].Split("\"")[0],
+            ImageCount = imageCount,
+            IsSponsored = id.Contains("sponsored"),
+            StockType = singleCar.Split("class=\"stock-type\">")[1].Split("<")[0],
+            Title = singleCar.Split("h2 class=\"title\">")[1].Split("</h2>")[0],
+            Mileage = singleCar.Split("<div class=\"mileage\">")[1].Split("</div>")[0],
+            Price = singleCar.Split("span class=\"primary-price\">")[1].Split("</span>")[0],
+            DealBadge = dealBadge,
+            Dealer = new DealerDto()
+            {
+                Name = dealerName,
+                Rating = dealerRating,
+            }
+        };
+
+        return result;
     }
 
     /// <summary>
@@ -148,9 +228,9 @@ internal class Program
         HandleConsole.AddStatus(signInButtonElement.Success, $"On Click Sign In Button");
 
         //Input user credentials to opened popup
-        var addUsernameCredentialToElement = await browser.EvaluateScriptAsync($"document.querySelector('cars-auth-modal').querySelector(\"[id=auth-modal-email]\").value='{credentials.Username}'");
+        var addUsernameCredentialToElement = await browser.EvaluateScriptAsync($"document.querySelector('cars-auth-modal').querySelector(\"[id=auth-modal-email]\").value='{_credentials.Username}'");
         HandleConsole.AddStatus(addUsernameCredentialToElement.Success, $"On Add Username to Email Input");
-        var addPasswordCredentialToElement = await browser.EvaluateScriptAsync($"document.querySelector('cars-auth-modal').querySelector(\"[id=auth-modal-current-password]\").value='{credentials.Password}'");
+        var addPasswordCredentialToElement = await browser.EvaluateScriptAsync($"document.querySelector('cars-auth-modal').querySelector(\"[id=auth-modal-current-password]\").value='{_credentials.Password}'");
         HandleConsole.AddStatus(addPasswordCredentialToElement.Success, $"On Add Password to Email Input");
 
         //Click sign in button in sign in titled popup
@@ -178,10 +258,11 @@ internal class Program
     /// </summary>
     /// <param name="browser"></param>
     /// <returns></returns>
-    private static async Task WaitForPageLoadEnd(ChromiumWebBrowser browser)
+    private static async Task WaitForPageLoadEnd(ChromiumWebBrowser browser, bool onlyFrameLoad = false)
     {
         await WaitForPageFrameLoadEnd(browser);
-        await WaitForPageLoadingStateChanged(browser);
+        if (onlyFrameLoad == false)
+            await WaitForPageLoadingStateChanged(browser);
     }
 
     /// <summary>
