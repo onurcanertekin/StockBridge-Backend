@@ -38,10 +38,36 @@ internal class Program
 
             await LoginToSite(browser);
             await SelectFiltersAndClickSearchButton(browser);
+
+            ////All Tesla's without model filter
             await GetCarsResult(browser, _result.AllTesla.CarList);
             await GatherRandomCarData(browser, _result.AllTesla);
             await GetNotableHighlights(browser, _result.AllTesla);
+
+            //Set model x filter
+            await FilterForModelX(browser);
+
+            //Only Model X Tesla's
+            await GetCarsResult(browser, _result.TeslaModelX.CarList);
+            await GatherRandomCarData(browser, _result.TeslaModelX);
+            await GetNotableHighlights(browser, _result.TeslaModelX);
         }
+    }
+
+    /// <summary>
+    /// Go back to search result page and click model X filter on filter section
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task FilterForModelX(ChromiumWebBrowser browser)
+    {
+        await browser.LoadUrlAsync("https://www.cars.com/shopping/results/?stock_type=used&makes%5B%5D=tesla&models%5B%5D=&list_price_max=100000&maximum_distance=all&zip=94596");
+
+        var response = await browser.EvaluateScriptAsync($"document.querySelector('[class=\"sds-field filter refinement-simple available \"]').querySelector('input[value=\"tesla-model_x\"]').click()");
+
+        //TODO: remove Thread.sleep
+        Thread.Sleep(1000);
+        await browser.WaitForInitialLoadAsync();
     }
 
     /// <summary>
@@ -127,7 +153,7 @@ internal class Program
         CarMinimizedDto selectedCar = PickRandomCar(aboutCars);
         await browser.LoadUrlAsync(selectedCar.Uri);
         HandleConsole.AddStatus(true, $"Car link: {selectedCar.Uri}");
-        await GatherDetailedCarData(browser, aboutCars.CarDetail);
+        await GatherDetailedCarData(browser, aboutCars);
     }
 
     /// <summary>
@@ -147,14 +173,14 @@ internal class Program
     /// </summary>
     /// <param name="browser"></param>
     /// <returns></returns>
-    private static async Task GatherDetailedCarData(ChromiumWebBrowser browser, CarDetailedDto carDetail)
+    private static async Task GatherDetailedCarData(ChromiumWebBrowser browser, CarListAndCarDetailWithNotableHighlights aboutCars)
     {
         short imageCount = 0;
         var getImageCount = await browser.EvaluateScriptAsync($"(function() {{ return document.querySelector('vdp-gallery').getAttribute(\"media-count\"); }})();");
         if (getImageCount.Success && getImageCount.Result != null)
             short.TryParse(Convert.ToString(getImageCount.Result), out imageCount);
 
-        carDetail = new()
+        aboutCars.CarDetail = new()
         {
             ImageCount = imageCount,
             Price = await GetCarDetailDataFromSelector(browser, "[class=\"primary-price\"]"),
@@ -520,11 +546,9 @@ internal class Program
     /// </summary>
     /// <param name="browser"></param>
     /// <returns></returns>
-    private static async Task WaitForPageLoadEnd(ChromiumWebBrowser browser, bool onlyFrameLoad = false)
+    private static async Task WaitForPageLoadEnd(ChromiumWebBrowser browser)
     {
         await WaitForPageFrameLoadEnd(browser);
-        if (onlyFrameLoad == false)
-            await WaitForPageLoadingStateChanged(browser);
     }
 
     /// <summary>
@@ -545,44 +569,5 @@ internal class Program
         }
         browser.FrameLoadEnd += FrameLoadEndHandler;
         await frameLoadTaskCompletionSource.Task;
-    }
-
-    /// <summary>
-    /// Will wait for browser's loading state change
-    /// </summary>
-    /// <param name="browser"></param>
-    /// <returns></returns>
-    private static async Task WaitForPageLoadingStateChanged(ChromiumWebBrowser browser)
-    {
-        var frameLoadTaskCompletionSource = new TaskCompletionSource<bool>();
-        void LoadingStateChangeHandler(object sender, LoadingStateChangedEventArgs args)
-        {
-            //Wait for the Page to finish loading
-            if (args.IsLoading == false)
-            {
-                frameLoadTaskCompletionSource.TrySetResult(true);
-            }
-        };
-        browser.LoadingStateChanged += LoadingStateChangeHandler;
-        await frameLoadTaskCompletionSource.Task;
-    }
-
-    /// <summary>
-    /// Retrive both cookies and local storage datas
-    /// </summary>
-    /// <param name="browser"></param>
-    /// <returns></returns>
-    private static async Task SaveCookiesAndLocalStorage(ChromiumWebBrowser browser)
-    {
-        //cookies
-        var cookieManager = browser.GetCookieManager();
-        var cookieList = await cookieManager.VisitAllCookiesAsync();
-
-        //Local storage
-        var localStorage = await browser.GetMainFrame().EvaluateScriptAsync("(function() { return window.localStorage; })();");
-        if (localStorage.Success)
-            foreach (var item in localStorage.Result as System.Dynamic.ExpandoObject)
-            {
-            }
     }
 }
