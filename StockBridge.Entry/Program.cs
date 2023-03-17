@@ -40,7 +40,7 @@ internal class Program
     {
         var topbarMenuButtonElement = await browser.EvaluateScriptAsync("document.getElementsByClassName(\"nav-user-menu-button\")[0].click()");
         HandleConsole.AddStatus(topbarMenuButtonElement.Success, $"On Click Menu Button");
-        //var slotElementInModalPopup = await browser.EvaluateScriptAsync("document.querySelector('cars-global-header').shadowRoot.querySelector('spark-modal').shadowRoot.children[0].getElementsByTagName('slot')[0]");
+
         var signInButtonElement = await browser.EvaluateScriptAsync("document.querySelector('cars-global-header').shadowRoot.querySelector('spark-button').click()");
         HandleConsole.AddStatus(signInButtonElement.Success, $"On Click Sign In Button");
 
@@ -51,5 +51,54 @@ internal class Program
 
         var signInModalSignInButtonElement = await browser.EvaluateScriptAsync("document.querySelector('cars-auth-modal').shadowRoot.querySelector('spark-button').click()");
         HandleConsole.AddStatus(signInModalSignInButtonElement.Success, $"On Click Sign In Button In Sign In Modal");
+
+        await WaitForPageReloadEnd(browser);
+
+        var checkIsLoginStatePersist = await browser.EvaluateScriptAsync("document.querySelector('cars-global-header').shadowRoot.querySelector('[class=nav-user-name]').innerText");
+        if (checkIsLoginStatePersist.Success)
+        {
+            if ((checkIsLoginStatePersist.Result as string).Contains("Hi,"))
+                HandleConsole.AddStatus(true, $"Login State Persist, Can Continue");
+            else
+                HandleConsole.AddStatus(false, $"Login State Does Not Persist, Lost Current State");
+        }
+        else
+            HandleConsole.AddStatus(false, $"Login State Does Not Persist, Lost Current State");
+    }
+
+    /// <summary>
+    /// Wait for the page to finish reloading
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task WaitForPageReloadEnd(ChromiumWebBrowser browser)
+    {
+        var frameLoadTaskCompletionSource = new TaskCompletionSource<bool>();
+        void FrameLoadEndHandler(object sender, FrameLoadEndEventArgs e)
+        {
+            if (e.Frame.IsMain)
+            {
+                frameLoadTaskCompletionSource.TrySetResult(true);
+                browser.FrameLoadEnd -= FrameLoadEndHandler;
+            }
+        }
+        browser.FrameLoadEnd += FrameLoadEndHandler;
+        await frameLoadTaskCompletionSource.Task;
+    }
+
+    /// <summary>
+    /// Retrive both cookies and local storage datas
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task SaveCookiesAndLocalStorage(ChromiumWebBrowser browser)
+    {
+        var cookieManager = browser.GetCookieManager();
+        var cookieList = await cookieManager.VisitAllCookiesAsync();
+        var localStorage = await browser.GetMainFrame().EvaluateScriptAsync("(function() { return window.localStorage; })();");
+        if (localStorage.Success)
+            foreach (var item in localStorage.Result as System.Dynamic.ExpandoObject)
+            {
+            }
     }
 }
