@@ -2,11 +2,13 @@
 using CefSharp.OffScreen;
 using StockBridge.Dto;
 using StockBridge.Entry;
+using System.Text.RegularExpressions;
 
 internal class Program
 {
     private static CredentialsDto _credentials = ConfigManager.GetCredentials();
-    private static List<CarDto> _cars = new();
+    private static List<CarMinimizedDto> _cars = new();
+    private static CarDetailedDto _detailedCar = new();
 
     private static async Task Main(string[] args)
     {
@@ -36,7 +38,179 @@ internal class Program
             await LoginToSite(browser);
             await SelectFiltersAndClickSearchButton(browser);
             await GetCarsResult(browser);
+            await GatherRandomCarData(browser);
         }
+    }
+
+    /// <summary>
+    /// Will select a random car from current car list and navigate its uri, then will gather its data.
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task GatherRandomCarData(ChromiumWebBrowser browser)
+    {
+        Random rnd = new Random();
+        int r = rnd.Next(_cars.Count);
+        CarMinimizedDto selectedCar = _cars[r];
+        await browser.LoadUrlAsync(selectedCar.Uri);
+        HandleConsole.AddStatus(true, $"Car link: {selectedCar.Uri}");
+        await GatherDetailedCarData(browser);
+    }
+
+    /// <summary>
+    /// Start extracting data
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task GatherDetailedCarData(ChromiumWebBrowser browser)
+    {
+        short imageCount = 0;
+        var getImageCount = await browser.EvaluateScriptAsync($"(function() {{ return document.querySelector('vdp-gallery').getAttribute(\"media-count\"); }})();");
+        if (getImageCount.Success && getImageCount.Result != null)
+            short.TryParse(Convert.ToString(getImageCount.Result), out imageCount);
+
+        _detailedCar = new()
+        {
+            ImageCount = imageCount,
+            Price = await GetCarDetailDataFromSelector(browser, "[class=\"primary-price\"]"),
+            SellerContactPhone = await GetCarDetailDataFromSelector(browser, "[class=\"dealer-phone\"]"),
+            StockType = await GetCarDetailDataFromSelector(browser, "[class=\"new-used\"]"),
+            Title = await GetCarDetailDataFromSelector(browser, "[class=\"listing-title\"]"),
+            EstimatedMonthlyPayment = await GetCarDetailDataFromSelector(browser, "[class=\"js-estimated-monthly-payment-formatted-value-with-abr\"]"),
+            DealBadge = await GetCarDetailDataFromSelector(browser, "[class=\"sds-badge__label\"]"),
+            Mileage = await GetCarDetailDataFromSelector(browser, "[class=\"listing-mileage\"]"),
+            Uri = browser.Address,
+            CarBasics = await GetCarBasicsData(browser),
+            CarFeatures = await GetCarFeaturesData(browser),
+            CarHistory = await GetCarHistoryData(browser),
+        };
+    }
+
+    private static async Task<string?> GetCarDetailDataFromSelector(ChromiumWebBrowser browser, string selector)
+    {
+        var fetchCarDataFromSelector = await browser.EvaluateScriptAsync($"(function() {{ return document.querySelector('{selector}').textContent; }})();");
+        if (fetchCarDataFromSelector.Success && fetchCarDataFromSelector.Result != null)
+            return Convert.ToString(fetchCarDataFromSelector.Result);
+        return null;
+    }
+
+    private static async Task<CarHistoryDto> GetCarHistoryData(ChromiumWebBrowser browser)
+    {
+        var fetchCarBasicInfo = await browser.EvaluateScriptAsync("(function() { return document.querySelector('section.vehicle-history-section').getElementsByTagName(\"dl\")[0].innerHTML; })();");
+        HandleConsole.AddStatus(fetchCarBasicInfo.Success, $"Fetch Car History Info");
+        if (fetchCarBasicInfo.Success && fetchCarBasicInfo.Result != null)
+        {
+            string responseString = Convert.ToString(fetchCarBasicInfo.Result);
+            return new()
+            {
+                AccidentsOrDamage = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Accidents or damage"),
+                FirstOwnerVehicle = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "1-owner vehicle"),
+                PersonelUseOnly = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Personal use only")
+            };
+        }
+        return new();
+    }
+
+    /// <summary>
+    /// Will get datas in features section
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task<CarFeaturesDto> GetCarFeaturesData(ChromiumWebBrowser browser)
+    {
+        var fetchCarBasicInfo = await browser.EvaluateScriptAsync("(function() { return document.querySelector('section.features-section').getElementsByTagName(\"dl\")[0].innerHTML; })();");
+        HandleConsole.AddStatus(fetchCarBasicInfo.Success, $"Fetch Car Feature Info");
+        if (fetchCarBasicInfo.Success && fetchCarBasicInfo.Result != null)
+        {
+            string responseString = Convert.ToString(fetchCarBasicInfo.Result);
+            return new()
+            {
+                Convenience = ExtractCarFeatureDataFromGivenName(responseString, "Convenience"),
+                Entertainment = ExtractCarFeatureDataFromGivenName(responseString, "Entertainment"),
+                Exterior = ExtractCarFeatureDataFromGivenName(responseString, "Exterior"),
+                Safety = ExtractCarFeatureDataFromGivenName(responseString, "Safety"),
+                Seating = ExtractCarFeatureDataFromGivenName(responseString, "Seating"),
+                AdditionalPopularFeatures = await ExtractCarFeatureAdditionalData(browser)
+            };
+        }
+        return new();
+    }
+
+    private static async Task<List<string>> ExtractCarFeatureAdditionalData(ChromiumWebBrowser browser)
+    {
+        var fetchCarBasicInfo = await browser.EvaluateScriptAsync("(function() { return documentdocument.getElementsByClassName('auto-corrected-feature-list')[0].textContent; })();");
+        if (fetchCarBasicInfo.Success && fetchCarBasicInfo.Result != null)
+        {
+            return Convert.ToString(fetchCarBasicInfo.Result).Split(',').ToList();
+        }
+        return new();
+    }
+
+    /// <summary>
+    /// Use regex to extract that part of body, create a list from ul/li
+    /// </summary>
+    /// <param name="stringBody"></param>
+    /// <param name="detailName"></param>
+    /// <returns></returns>
+    private static List<string> ExtractCarFeatureDataFromGivenName(string? stringBody, string detailName)
+    {
+        string regexPattern = @"<dt>\s*" + Regex.Escape(detailName) + @"\s*<\/dt>\s*<dd>\s*<ul[^>]*>(.*?)<\/ul>\s*<\/dd>";
+        Match match = Regex.Match(stringBody, regexPattern, RegexOptions.Singleline);
+
+        if (match.Success)
+        {
+            string ulContent = match.Groups[1].Value;
+            MatchCollection liMatches = Regex.Matches(ulContent, @"<li[^>]*>(.*?)<\/li>");
+            List<string> liValues = liMatches.Cast<Match>().Select(m => m.Groups[1].Value.Trim()).ToList();
+            return liValues;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Will get datas in basic section
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task<CarBasicsDto> GetCarBasicsData(ChromiumWebBrowser browser)
+    {
+        var fetchCarBasicInfo = await browser.EvaluateScriptAsync("(function() { return document.querySelector('section.basics-section').getElementsByTagName(\"dl\")[0].innerHTML; })();");
+        HandleConsole.AddStatus(fetchCarBasicInfo.Success, $"Fetch Car Basic Info");
+        if (fetchCarBasicInfo.Success && fetchCarBasicInfo.Result != null)
+        {
+            string responseString = Convert.ToString(fetchCarBasicInfo.Result);
+            return new()
+            {
+                ExteriorColor = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Exterior color"),
+                InteriorColor = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Interior color"),
+                DriveTrain = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Drivetrain"),
+                FuelType = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Fuel type"),
+                Transmission = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Transmission"),
+                Engine = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Engine"),
+                VIN = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "VIN"),
+                Stock = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Stock #"),
+                Mileage = ExtractCarBasicOrHistoryDataFromGivenName(responseString, "Mileage"),
+            };
+        }
+        return new();
+    }
+
+    /// <summary>
+    /// Extract data from whole string
+    /// </summary>
+    /// <param name="stringBody"></param>
+    /// <param name="detailName"></param>
+    /// <returns></returns>
+    private static string ExtractCarBasicOrHistoryDataFromGivenName(string stringBody, string detailName)
+    {
+        var regex = new Regex(string.Format(@"<dt>{0}<\/dt>\s*<dd[^>]*>(.*?)<\/dd>", Regex.Escape(detailName)));
+        var match = regex.Match(stringBody);
+        if (match.Success)
+        {
+            string result = match.Groups[1].Value.Trim();
+            return result;
+        }
+        return string.Empty;
     }
 
     /// <summary>
@@ -72,6 +246,7 @@ internal class Program
 
         //Wait until page refresh ok
         //await WaitForPageLoadEnd(browser, onlyFrameLoad: true);
+        //TODO: Thread.Sleep is a bad practice, it lock program. Will try to implement javascript setTimeout system
         Thread.Sleep(1000);
         //Use same script as page one to fetch all cars in this page.
         var allCarsInSecondPage = await browser.EvaluateScriptAsync(script);
@@ -93,7 +268,7 @@ internal class Program
     /// <remarks>TODO: will try to get datas from browser.</remarks>
     /// <param name="singleCar"></param>
     /// <returns></returns>
-    private static CarDto ParseCarDataFromString(string singleCar)
+    private static CarMinimizedDto ParseCarDataFromString(string singleCar)
     {
         //Get image count
         short.TryParse(singleCar.Split("cars-filmstrip totalcount=\"")[1].Split("\"")[0], out short imageCount);
@@ -109,17 +284,19 @@ internal class Program
             dealerName = singleCar.Split("<div class=\"dealer-name\">")[1].Split("<strong>")[1].Split("</strong>")[0];
         else
             dealerName = singleCar.Split("<div class=\"seller-name\">")[1].Split("<strong>")[1].Split("</strong>")[0];
+
         //Get deal badge
         string dealBadge = string.Empty;
         if (singleCar.Split("class=\"sds-badge__label\">").Length > 1)
             dealBadge = singleCar.Split("class=\"sds-badge__label\">")[1].Split("<span ")[0];
         else
             dealBadge = "No Deal";
+
         //Get car element's Id attr.
         string id = singleCar.Split("id=\"")[1].Split("\"")[0];
         HandleConsole.AddStatus(true, id);
 
-        CarDto result = new()
+        CarMinimizedDto result = new()
         {
             Id = id,
             Uri = ConfigManager.GetUri().SiteUri + singleCar.Split("<a href=\"/")[1].Split("\"")[0],
@@ -199,7 +376,6 @@ internal class Program
     /// <param name="mustSelect"></param>
     /// <param name="optionName"></param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     private static async Task EnsureDataSelected(ChromiumWebBrowser browser, string dataActivityKey, string mustSelect, string optionName)
     {
         var checkFilterResponse = await browser.EvaluateScriptAsync($@"document.querySelector('[data-activitykey=""{dataActivityKey}""]').value;");
