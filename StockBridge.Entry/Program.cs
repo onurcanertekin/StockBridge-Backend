@@ -1,5 +1,6 @@
 ﻿using CefSharp;
 using CefSharp.OffScreen;
+using Newtonsoft.Json;
 using StockBridge.Dto;
 using StockBridge.Entry;
 using System.Text.RegularExpressions;
@@ -52,6 +53,24 @@ internal class Program
             await GatherRandomCarData(browser, _result.TeslaModelX);
             await GetNotableHighlights(browser, _result.TeslaModelX);
         }
+        ExportResultAsJsonFile();
+        HandleConsole.Exit(true, "All good. Result must be written in your desktop named 'Result.json'");
+    }
+
+    /// <summary>
+    /// Export data as json
+    /// </summary>
+    private static void ExportResultAsJsonFile()
+    {
+        // Serialize the object to a JSON string
+        string jsonString = JsonConvert.SerializeObject(_result);
+
+        //Get desktop Path
+        string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+        // Write the JSON string to a file
+        File.WriteAllText(Path.Combine(desktopPath, "Result.json"), jsonString);
+
     }
 
     /// <summary>
@@ -61,9 +80,16 @@ internal class Program
     /// <returns></returns>
     private static async Task FilterForModelX(ChromiumWebBrowser browser)
     {
-        await browser.LoadUrlAsync("https://www.cars.com/shopping/results/?stock_type=used&makes%5B%5D=tesla&models%5B%5D=&list_price_max=100000&maximum_distance=all&zip=94596");
+        //TODO: refactor this method...
+        await browser.WaitForInitialLoadAsync();
+        await browser.LoadUrlAsync(_searchResultUri);
+        await browser.WaitForInitialLoadAsync();
+
+        //TODO: remove Thread.sleep
+        Thread.Sleep(1000);
 
         var response = await browser.EvaluateScriptAsync($"document.querySelector('[class=\"sds-field filter refinement-simple available \"]').querySelector('input[value=\"tesla-model_x\"]').click()");
+        HandleConsole.AddStatus(response.Success, $"Click Model X on Model Filter in Search Result Page");
 
         //TODO: remove Thread.sleep
         Thread.Sleep(1000);
@@ -101,7 +127,8 @@ internal class Program
     {
         CarMinimizedDto selectedCar = PickRandomCar(aboutCars);
         await browser.LoadUrlAsync(selectedCar.Uri);
-        HandleConsole.AddStatus(true, $"Car link: {selectedCar.Uri}");
+        HandleConsole.AddStatus(false, $"Home Delivery Badge Coul'nt Found For This Car. New Car Will Be Selected.");
+        HandleConsole.AddStatus(true, $"New Car Link: {selectedCar.Uri}");
         await GetNotableHighlights(browser, aboutCars);
     }
 
@@ -119,6 +146,7 @@ internal class Program
             HomeDelivery = await GetPartOfNotableHighlightDatas(browser, "home_delivery-badge"),
             VirtualAppointments = await GetPartOfNotableHighlightDatas(browser, "virtual_appointments-badge"),
         };
+        HandleConsole.AddStatus(true, $"Notable Highlights fetched");
     }
 
     /// <summary>
@@ -130,6 +158,7 @@ internal class Program
     private static async Task<string> GetPartOfNotableHighlightDatas(ChromiumWebBrowser browser, string selector)
     {
         var notableHighlightData = await browser.EvaluateScriptAsync($"(function() {{ return document.querySelector('[class=\"sds-modal sds-modal-visible\"]').querySelector('[class=\"sds-modal__content-body\"]').querySelector('[class=\"{selector}\"]').getElementsByClassName(\"badge-description\")[0].textContent; }})();");
+        HandleConsole.AddStatus(notableHighlightData.Success, $"Notable Highlights Part, Selector:{selector}");
         if (notableHighlightData.Success && notableHighlightData.Result != null)
         {
             var response = Convert.ToString(notableHighlightData.Result);
