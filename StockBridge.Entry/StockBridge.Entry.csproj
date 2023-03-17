@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="CefSharp.OffScreen.NETCore" Version="111.2.20" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 
