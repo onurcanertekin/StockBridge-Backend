@@ -34,13 +34,42 @@ internal class Program
 
             await LoginToSite(browser);
             await SelectFiltersAndClickSearchButton(browser);
+            await GetCarsResult(browser);
         }
     }
 
+    /// <summary>
+    /// Will get all cars result in first two page
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task GetCarsResult(ChromiumWebBrowser browser)
+    {
+        var script = "(function() { var els = document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]'); return Array.from(els).map(el => el.outerHTML); })();";
+
+        //TODO: will try to retrive data as html element but until then hard coded string will help this parse...
+        //var script = "(function() { var els = document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]'); return Array.from(els); })();";
+        //var script = "(function() { return Array.from(document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]')); })();";
+        //var script = "(function() { try { var els = document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]'); return Array.from(els); } catch (error) { console.error(error); return error; } })();";
+        var allCarsInFirstPage = await browser.EvaluateScriptAsync(script);
+        if (allCarsInFirstPage.Success && allCarsInFirstPage.Result != null)
+        {
+            foreach (var singleCar in allCarsInFirstPage.Result as List<object>)
+            {
+            }
+        }
+    }
+
+    /// <summary>
+    /// Will set all filters and click search button on car filter
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
     private static async Task SelectFiltersAndClickSearchButton(ChromiumWebBrowser browser)
     {
         //select from select/option element
         await SelectFilterOptions(browser, "stock-type", "used", "New/Used");
+        await SelectFilterOptions(browser, "model", "", "Model");
         await SelectFilterOptions(browser, "make", "tesla", "Make");
         await SelectFilterOptions(browser, "price", "100000", "Price");
         await SelectFilterOptions(browser, "distance", "all", "Distance");
@@ -54,7 +83,7 @@ internal class Program
         HandleConsole.AddStatus(searchButtonElement.Success, $"On Search Button Click");
 
         //wait until page reload
-        await WaitForPageReloadEnd(browser);
+        await WaitForPageLoadEnd(browser);
         HandleConsole.AddStatus(true, $"Filters selected and result page fetched");
     }
 
@@ -66,17 +95,41 @@ internal class Program
     /// <param name="mustSelect">which data should be picked</param>
     /// <param name="optionName">to show on console</param>
     /// <returns></returns>
-    private static async Task SelectFilterOptions(ChromiumWebBrowser browser, string dataActivityKey, string mustSelect, string optionName)
+    private static async Task SelectFilterOptions(ChromiumWebBrowser browser, string dataActivityKey, string mustSelect, string optionName, bool tryAgain = false)
     {
+        var optionAndElementRandom = new Random().Next();
         var selectFilterResponse = await browser.EvaluateScriptAsync(
-            $@"const options_{mustSelect} = document.querySelector('[data-activitykey=""{dataActivityKey}""]').options;
-            for (let i = 0; i < options_{mustSelect}.length; i++) {{
-              if (options_{mustSelect}[i].value === '{mustSelect}') {{
-                  options_{mustSelect}[i].selected = true;
-                  break;
-              }}
-            }}");
-        HandleConsole.AddStatus(selectFilterResponse.Success, $"On Select {optionName} Option Selected {mustSelect}");
+            $@"const option_{optionAndElementRandom}=document.querySelector('[data-activitykey=""{dataActivityKey}""]')
+             const element_{optionAndElementRandom}= option_{optionAndElementRandom}.querySelector('option[value=""{mustSelect}""]')
+             element_{optionAndElementRandom}.focus();
+             element_{optionAndElementRandom}.selected=true;
+             element_{optionAndElementRandom}.dispatchEvent(new Event('change', {{ bubbles: true }}))");
+        HandleConsole.AddStatus(selectFilterResponse.Success, $"On {optionName} Set {mustSelect}");
+
+        //// Wait for the select element to fire the "change" event
+        await browser.WaitForSelectorAsync($"[data-activitykey=\"{dataActivityKey}\"]");
+        await EnsureDataSelected(browser, dataActivityKey, mustSelect, optionName);
+    }
+
+    /// <summary>
+    /// Will check if data set properly worked
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <param name="dataActivityKey"></param>
+    /// <param name="mustSelect"></param>
+    /// <param name="optionName"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    private static async Task EnsureDataSelected(ChromiumWebBrowser browser, string dataActivityKey, string mustSelect, string optionName)
+    {
+        var checkFilterResponse = await browser.EvaluateScriptAsync($@"document.querySelector('[data-activitykey=""{dataActivityKey}""]').value;");
+        if (checkFilterResponse.Success && checkFilterResponse.Result as string == mustSelect)
+            HandleConsole.AddStatus(true, $"On Select {optionName} Option Select Is Ensured {mustSelect}");
+        else
+        {
+            HandleConsole.AddStatus(false, $"On Select {optionName} Option Select Is Not {mustSelect}, Will Try Again");
+            await SelectFilterOptions(browser, dataActivityKey, mustSelect, optionName, true);
+        }
     }
 
     /// <summary>
@@ -105,7 +158,7 @@ internal class Program
         HandleConsole.AddStatus(signInModalSignInButtonElement.Success, $"On Click Sign In Button In Sign In Modal");
 
         //wait until page reload
-        await WaitForPageReloadEnd(browser);
+        await WaitForPageLoadEnd(browser);
 
         //check if we correctly logged in
         var checkIsLoginStatePersist = await browser.EvaluateScriptAsync("document.querySelector('cars-global-header').shadowRoot.querySelector('[class=nav-user-name]').innerText");
@@ -121,11 +174,22 @@ internal class Program
     }
 
     /// <summary>
-    /// Wait for the page to finish reloading
+    /// Wait for the page to finish loading
     /// </summary>
     /// <param name="browser"></param>
     /// <returns></returns>
-    private static async Task WaitForPageReloadEnd(ChromiumWebBrowser browser)
+    private static async Task WaitForPageLoadEnd(ChromiumWebBrowser browser)
+    {
+        await WaitForPageFrameLoadEnd(browser);
+        await WaitForPageLoadingStateChanged(browser);
+    }
+
+    /// <summary>
+    /// Will wait for browser's frame load end
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task WaitForPageFrameLoadEnd(ChromiumWebBrowser browser)
     {
         var frameLoadTaskCompletionSource = new TaskCompletionSource<bool>();
         void FrameLoadEndHandler(object sender, FrameLoadEndEventArgs e)
@@ -137,6 +201,26 @@ internal class Program
             }
         }
         browser.FrameLoadEnd += FrameLoadEndHandler;
+        await frameLoadTaskCompletionSource.Task;
+    }
+
+    /// <summary>
+    /// Will wait for browser's loading state change
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
+    private static async Task WaitForPageLoadingStateChanged(ChromiumWebBrowser browser)
+    {
+        var frameLoadTaskCompletionSource = new TaskCompletionSource<bool>();
+        void LoadingStateChangeHandler(object sender, LoadingStateChangedEventArgs args)
+        {
+            //Wait for the Page to finish loading
+            if (args.IsLoading == false)
+            {
+                frameLoadTaskCompletionSource.TrySetResult(true);
+            }
+        };
+        browser.LoadingStateChanged += LoadingStateChangeHandler;
         await frameLoadTaskCompletionSource.Task;
     }
 
