@@ -9,6 +9,7 @@ internal class Program
     private static CredentialsDto _credentials = ConfigManager.GetCredentials();
     private static ResultDto _result = new();
     private static string _searchResultUri = string.Empty;
+    private static Random _rnd = new Random();
 
     private static async Task Main(string[] args)
     {
@@ -136,8 +137,7 @@ internal class Program
     /// <returns></returns>
     private static CarMinimizedDto PickRandomCar(CarListAndCarDetailWithNotableHighlights aboutCars)
     {
-        Random rnd = new Random();
-        int r = rnd.Next(aboutCars.CarList.Count);
+        int r = _rnd.Next(aboutCars.CarList.Count);
         CarMinimizedDto selectedCar = aboutCars.CarList[r];
         return selectedCar;
     }
@@ -440,7 +440,7 @@ internal class Program
     /// <returns></returns>
     private static async Task SelectFilterOptions(ChromiumWebBrowser browser, string dataActivityKey, string mustSelect, string optionName, bool tryAgain = false)
     {
-        var optionAndElementRandom = new Random().Next();
+        var optionAndElementRandom = _rnd.Next();
         var selectFilterResponse = await browser.EvaluateScriptAsync(
             $@"const option_{optionAndElementRandom}=document.querySelector('[data-activitykey=""{dataActivityKey}""]')
              const element_{optionAndElementRandom}= option_{optionAndElementRandom}.querySelector('option[value=""{mustSelect}""]')
