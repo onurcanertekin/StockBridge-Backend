@@ -7,8 +7,8 @@ using System.Text.RegularExpressions;
 internal class Program
 {
     private static CredentialsDto _credentials = ConfigManager.GetCredentials();
-    private static List<CarMinimizedDto> _cars = new();
-    private static CarDetailedDto _detailedCar = new();
+    private static ResultDto _result = new();
+    private static string _searchResultUri = string.Empty;
 
     private static async Task Main(string[] args)
     {
@@ -37,9 +37,83 @@ internal class Program
 
             await LoginToSite(browser);
             await SelectFiltersAndClickSearchButton(browser);
-            await GetCarsResult(browser);
-            await GatherRandomCarData(browser);
+            await GetCarsResult(browser, _result.AllTesla.CarList);
+            await GatherRandomCarData(browser, _result.AllTesla);
+            await GetNotableHighlights(browser, _result.AllTesla);
         }
+    }
+
+    /// <summary>
+    /// Will try to get Home Delivery and notable highlights from current car, if not found then will search all cars in list to find working one
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <param name="aboutCars"></param>
+    /// <returns></returns>
+    private static async Task GetNotableHighlights(ChromiumWebBrowser browser, CarListAndCarDetailWithNotableHighlights aboutCars)
+    {
+        var findHomeDeliveryButton = await browser.EvaluateScriptAsync($"document.querySelector('[class=\"sds-badge sds-badge--home-delivery\"]').click()");
+        if (findHomeDeliveryButton.Success)
+        {
+            var getNotableHighlightModalDatas = await browser.EvaluateScriptAsync($"(function() {{ return document.querySelector('[class=\"sds-modal sds-modal-visible\"]').querySelector('[class=\"sds-modal__content-body\"]').textContent; }})();");
+            if (getNotableHighlightModalDatas.Success && getNotableHighlightModalDatas.Result != null)
+                await ParseNotableHighlightData(browser, aboutCars);
+            else
+                await CheckAnotherPageForHomeDelivery(browser, aboutCars);
+        }
+        else
+            await CheckAnotherPageForHomeDelivery(browser, aboutCars);
+    }
+
+    /// <summary>
+    /// Will navigate to another car page to find Home Delivery badge
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <param name="aboutCars"></param>
+    /// <returns></returns>
+    private static async Task CheckAnotherPageForHomeDelivery(ChromiumWebBrowser browser, CarListAndCarDetailWithNotableHighlights aboutCars)
+    {
+        CarMinimizedDto selectedCar = PickRandomCar(aboutCars);
+        await browser.LoadUrlAsync(selectedCar.Uri);
+        HandleConsole.AddStatus(true, $"Car link: {selectedCar.Uri}");
+        await GetNotableHighlights(browser, aboutCars);
+    }
+
+    /// <summary>
+    /// Parse notable highlight data from string
+    /// </summary>
+    /// <param name="body"></param>
+    /// <param name="notableHighlights"></param>
+    /// <returns></returns>
+    private static async Task ParseNotableHighlightData(ChromiumWebBrowser browser, CarListAndCarDetailWithNotableHighlights aboutCars)
+    {
+        aboutCars.NotableHighlights = new()
+        {
+            Deal = await GetPartOfNotableHighlightDatas(browser, "price-badge"),
+            HomeDelivery = await GetPartOfNotableHighlightDatas(browser, "home_delivery-badge"),
+            VirtualAppointments = await GetPartOfNotableHighlightDatas(browser, "virtual_appointments-badge"),
+        };
+    }
+
+    /// <summary>
+    /// Extract notable highlight data in modal popup with given selector
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <param name="selector"></param>
+    /// <returns></returns>
+    private static async Task<string> GetPartOfNotableHighlightDatas(ChromiumWebBrowser browser, string selector)
+    {
+        var notableHighlightData = await browser.EvaluateScriptAsync($"(function() {{ return document.querySelector('[class=\"sds-modal sds-modal-visible\"]').querySelector('[class=\"sds-modal__content-body\"]').querySelector('[class=\"{selector}\"]').getElementsByClassName(\"badge-description\")[0].textContent; }})();");
+        if (notableHighlightData.Success && notableHighlightData.Result != null)
+        {
+            var response = Convert.ToString(notableHighlightData.Result);
+
+            //Remove unwanted characters from response
+            string cleanedStr = Regex.Replace(response, @"\s+", " ").Trim();
+            string[] words = cleanedStr.Split(' ');
+            string mergedStr = string.Join(" ", words.Where(w => w != ""));
+            return mergedStr;
+        }
+        return null;
     }
 
     /// <summary>
@@ -47,14 +121,25 @@ internal class Program
     /// </summary>
     /// <param name="browser"></param>
     /// <returns></returns>
-    private static async Task GatherRandomCarData(ChromiumWebBrowser browser)
+    private static async Task GatherRandomCarData(ChromiumWebBrowser browser, CarListAndCarDetailWithNotableHighlights aboutCars)
     {
-        Random rnd = new Random();
-        int r = rnd.Next(_cars.Count);
-        CarMinimizedDto selectedCar = _cars[r];
+        CarMinimizedDto selectedCar = PickRandomCar(aboutCars);
         await browser.LoadUrlAsync(selectedCar.Uri);
         HandleConsole.AddStatus(true, $"Car link: {selectedCar.Uri}");
-        await GatherDetailedCarData(browser);
+        await GatherDetailedCarData(browser, aboutCars.CarDetail);
+    }
+
+    /// <summary>
+    /// Picks a random car from given car list
+    /// </summary>
+    /// <param name="aboutCars"></param>
+    /// <returns></returns>
+    private static CarMinimizedDto PickRandomCar(CarListAndCarDetailWithNotableHighlights aboutCars)
+    {
+        Random rnd = new Random();
+        int r = rnd.Next(aboutCars.CarList.Count);
+        CarMinimizedDto selectedCar = aboutCars.CarList[r];
+        return selectedCar;
     }
 
     /// <summary>
@@ -62,14 +147,14 @@ internal class Program
     /// </summary>
     /// <param name="browser"></param>
     /// <returns></returns>
-    private static async Task GatherDetailedCarData(ChromiumWebBrowser browser)
+    private static async Task GatherDetailedCarData(ChromiumWebBrowser browser, CarDetailedDto carDetail)
     {
         short imageCount = 0;
         var getImageCount = await browser.EvaluateScriptAsync($"(function() {{ return document.querySelector('vdp-gallery').getAttribute(\"media-count\"); }})();");
         if (getImageCount.Success && getImageCount.Result != null)
             short.TryParse(Convert.ToString(getImageCount.Result), out imageCount);
 
-        _detailedCar = new()
+        carDetail = new()
         {
             ImageCount = imageCount,
             Price = await GetCarDetailDataFromSelector(browser, "[class=\"primary-price\"]"),
@@ -218,7 +303,7 @@ internal class Program
     /// </summary>
     /// <param name="browser"></param>
     /// <returns></returns>
-    private static async Task GetCarsResult(ChromiumWebBrowser browser)
+    private static async Task GetCarsResult(ChromiumWebBrowser browser, List<CarMinimizedDto> carList)
     {
         HandleConsole.AddStatus(true, "Firts Page Cars Trying To Get And Parse");
 
@@ -235,10 +320,10 @@ internal class Program
             {
                 var carData = Convert.ToString(singleCar);
                 var car = ParseCarDataFromString(carData);
-                _cars.Add(car);
+                carList.Add(car);
             }
         }
-        HandleConsole.AddStatus(true, $"In First Page {_cars.Count} Amount Of Car Added To List");
+        HandleConsole.AddStatus(true, $"In First Page {carList.Count} Amount Of Car Added To List");
 
         //Click on second page pagination item
         var goToSecondPage = await browser.EvaluateScriptAsync("document.querySelector('[id=\"pagination-direct-link-2\"]').click()");
@@ -256,10 +341,10 @@ internal class Program
             {
                 var carData = Convert.ToString(singleCar);
                 var car = ParseCarDataFromString(carData);
-                _cars.Add(car);
+                carList.Add(car);
             }
         }
-        HandleConsole.AddStatus(true, $"In Total Cars Amount In List Is: {_cars.Count}");
+        HandleConsole.AddStatus(true, $"In Total Cars Amount In List Is: {carList.Count}");
     }
 
     /// <summary>
@@ -342,6 +427,7 @@ internal class Program
         //wait until page reload
         await WaitForPageLoadEnd(browser);
         HandleConsole.AddStatus(true, $"Filters selected and result page fetched");
+        _searchResultUri = browser.Address;
     }
 
     /// <summary>
