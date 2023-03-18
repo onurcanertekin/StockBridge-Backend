@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockBridge.Entry", "StockBridge.Entry\StockBridge.Entry.csproj", "{5CEE91B1-CEB0-4D34-8839-84722C514FFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockBridge.Dto", "StockBridge.Dto\StockBridge.Dto.csproj", "{A19D1D96-C9E8-4805-8758-58DAEB2669BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockBridge.Dto", "StockBridge.Dto\StockBridge.Dto.csproj", "{A19D1D96-C9E8-4805-8758-58DAEB2669BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

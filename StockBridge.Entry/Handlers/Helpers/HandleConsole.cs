@@ -1,16 +1,16 @@
-﻿namespace StockBridge.Entry
+﻿namespace StockBridge.Entry.Handlers.Helpers
 {
     /// <summary>
-    /// Will handle console and show current status.
+    /// handle console and show current status.
     /// </summary>
-    internal static class HandleConsole
+    public static class HandleConsole
     {
         /// <summary>
         /// Display current status to user
         /// </summary>
         /// <param name="success">is success or not</param>
         /// <param name="message">message to display user</param>
-        internal static void AddStatus(bool success, string message)
+        public static void AddStatus(bool success, string message)
         {
             if (success)
             {
@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="success">is success or not</param>
         /// <param name="message">message to display user on exit</param>
-        internal static void Exit(bool success, string message)
+        public static void Exit(bool success, string message)
         {
             if (success)
             {
@@ -40,7 +40,7 @@
         }
 
         /// <summary>
-        /// Will add message to console by color, if its exit then will wait to user's reaction to close.
+        /// add message to console by color, if its exit then wait to user's reaction to close.
         /// </summary>
         /// <param name="message">message to display user</param>
         /// <param name="foreignColor">color of current text</param>

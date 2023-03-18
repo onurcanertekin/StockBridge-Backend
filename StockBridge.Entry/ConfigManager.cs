@@ -4,7 +4,7 @@ using System.Configuration;
 namespace StockBridge.Entry
 {
     /// <summary>
-    /// Will read configuration datas from App.config file and return them.
+    /// read configuration datas from App.config file and return them.
     /// </summary>
     internal static class ConfigManager
     {
