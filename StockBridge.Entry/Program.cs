@@ -70,7 +70,6 @@ internal class Program
 
         // Write the JSON string to a file
         File.WriteAllText(Path.Combine(desktopPath, "Result.json"), jsonString);
-
     }
 
     /// <summary>
@@ -162,14 +161,20 @@ internal class Program
         if (notableHighlightData.Success && notableHighlightData.Result != null)
         {
             var response = Convert.ToString(notableHighlightData.Result);
-
-            //Remove unwanted characters from response
-            string cleanedStr = Regex.Replace(response, @"\s+", " ").Trim();
-            string[] words = cleanedStr.Split(' ');
-            string mergedStr = string.Join(" ", words.Where(w => w != ""));
+            string mergedStr = ClearUnwantedCharacters(response);
             return mergedStr;
         }
         return null;
+    }
+
+    //Clear unwanted characters such as \n or '  '(two space)
+    private static string ClearUnwantedCharacters(string? response)
+    {
+        //Remove unwanted characters from response
+        string cleanedStr = Regex.Replace(response, @"\s+", " ").Trim();
+        string[] words = cleanedStr.Split(' ');
+        string mergedStr = string.Join(" ", words.Where(w => w != ""));
+        return mergedStr;
     }
 
     /// <summary>
@@ -362,22 +367,7 @@ internal class Program
     {
         HandleConsole.AddStatus(true, "Firts Page Cars Trying To Get And Parse");
 
-        var script = "(function() { var els = document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]'); return Array.from(els).map(el => el.outerHTML); })();";
-
-        //TODO: will try to retrive data as html element but until then hard coded string will help this parse...
-        //var script = "(function() { var els = document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]'); return Array.from(els); })();";
-        //var script = "(function() { return Array.from(document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]')); })();";
-        //var script = "(function() { try { var els = document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]'); return Array.from(els); } catch (error) { console.error(error); return error; } })();";
-        var allCarsInFirstPage = await browser.EvaluateScriptAsync(script);
-        if (allCarsInFirstPage.Success && allCarsInFirstPage.Result != null)
-        {
-            foreach (var singleCar in allCarsInFirstPage.Result as List<object>)
-            {
-                var carData = Convert.ToString(singleCar);
-                var car = ParseCarDataFromString(carData);
-                carList.Add(car);
-            }
-        }
+        carList.AddRange(await GetCurrentPagesCarResult(browser));
         HandleConsole.AddStatus(true, $"In First Page {carList.Count} Amount Of Car Added To List");
 
         //Click on second page pagination item
@@ -389,63 +379,72 @@ internal class Program
         //TODO: Thread.Sleep is a bad practice, it lock program. Will try to implement javascript setTimeout system
         Thread.Sleep(1000);
         //Use same script as page one to fetch all cars in this page.
-        var allCarsInSecondPage = await browser.EvaluateScriptAsync(script);
+        carList.AddRange(await GetCurrentPagesCarResult(browser));
+        HandleConsole.AddStatus(true, $"In Total Cars Amount In List Is: {carList.Count}");
+    }
+
+    /// <summary>
+    /// This method will get all cars detail in current page
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <param name="carList"></param>
+    /// <param name="getCarIdsScript"></param>
+    /// <returns></returns>
+    private static async Task<List<CarMinimizedDto>> GetCurrentPagesCarResult(ChromiumWebBrowser browser)
+    {
+        List<CarMinimizedDto> result = new();
+        var getCarIdsScript = "(function() { return Array.from(document.querySelectorAll('[data-tracking-type=\"srp-vehicle-card\"]')).map(x=>x.id) })();";
+        var allCarsInSecondPage = await browser.EvaluateScriptAsync(getCarIdsScript);
         if (allCarsInSecondPage.Success && allCarsInSecondPage.Result != null)
         {
             foreach (var singleCar in allCarsInSecondPage.Result as List<object>)
             {
-                var carData = Convert.ToString(singleCar);
-                var car = ParseCarDataFromString(carData);
-                carList.Add(car);
+                string singleCarId = Convert.ToString(singleCar);
+                HandleConsole.AddStatus(true, $"Car Id Fetched: {singleCarId}");
+
+                var car = await ParseCarDataFromString(browser, singleCarId);
+                result.Add(car);
             }
         }
-        HandleConsole.AddStatus(true, $"In Total Cars Amount In List Is: {carList.Count}");
+        return result;
     }
 
     /// <summary>
     /// Bad string parse coding.
     /// </summary>
     /// <remarks>TODO: will try to get datas from browser.</remarks>
-    /// <param name="singleCar"></param>
+    /// <param name="singleCarId"></param>
     /// <returns></returns>
-    private static CarMinimizedDto ParseCarDataFromString(string singleCar)
+    private static async Task<CarMinimizedDto> ParseCarDataFromString(ChromiumWebBrowser browser, string singleCarId)
     {
         //Get image count
-        short.TryParse(singleCar.Split("cars-filmstrip totalcount=\"")[1].Split("\"")[0], out short imageCount);
+        short.TryParse(await GetCarListDetailBySelector(browser, singleCarId, "cars-filmstrip", true, "totalcount"), out short imageCount);
 
         //Get dealer rating
-        decimal dealerRating = 0;
-        if (singleCar.Split("span class=\"sds-rating__count\">").Length > 2)
-            decimal.TryParse(singleCar.Split("span class=\"sds-rating__count\">")[1].Split("</span>")[0], out dealerRating);
+        decimal.TryParse(await GetCarListDetailBySelector(browser, singleCarId, "span[class=\"sds-rating__count\"]"), out decimal dealerRating);
 
         //Get dealer name
-        string dealerName = string.Empty;
-        if (singleCar.Split("<div class=\"dealer-name\">").Length > 1)
-            dealerName = singleCar.Split("<div class=\"dealer-name\">")[1].Split("<strong>")[1].Split("</strong>")[0];
-        else
-            dealerName = singleCar.Split("<div class=\"seller-name\">")[1].Split("<strong>")[1].Split("</strong>")[0];
+        string dealerName = await GetCarListDetailBySelector(browser, singleCarId, "div[class=\"dealer-name\"]");
+        if (string.IsNullOrWhiteSpace(dealerName))
+            dealerName = await GetCarListDetailBySelector(browser, singleCarId, "div[class=\"seller-name\"]");
 
         //Get deal badge
-        string dealBadge = string.Empty;
-        if (singleCar.Split("class=\"sds-badge__label\">").Length > 1)
-            dealBadge = singleCar.Split("class=\"sds-badge__label\">")[1].Split("<span ")[0];
-        else
+        string dealBadge = await GetCarListDetailBySelector(browser, singleCarId, "[class=\"sds-badge__label\"]");
+        if (string.IsNullOrWhiteSpace(dealBadge))
             dealBadge = "No Deal";
 
         //Get car element's Id attr.
-        string id = singleCar.Split("id=\"")[1].Split("\"")[0];
-        HandleConsole.AddStatus(true, id);
 
         CarMinimizedDto result = new()
         {
-            Id = id,
-            Uri = ConfigManager.GetUri().SiteUri + singleCar.Split("<a href=\"/")[1].Split("\"")[0],
+            Id = singleCarId,
+            Uri = ConfigManager.GetUri().SiteUri + await GetCarListDetailBySelector(browser, singleCarId, "a[href]", true, "href"),
             ImageCount = imageCount,
-            IsSponsored = id.Contains("sponsored"),
-            StockType = singleCar.Split("class=\"stock-type\">")[1].Split("<")[0],
-            Title = singleCar.Split("h2 class=\"title\">")[1].Split("</h2>")[0],
-            Mileage = singleCar.Split("<div class=\"mileage\">")[1].Split("</div>")[0],
-            Price = singleCar.Split("span class=\"primary-price\">")[1].Split("</span>")[0],
+            IsSponsored = singleCarId.Contains("sponsored"),
+            StockType = await GetCarListDetailBySelector(browser, singleCarId, "p[class=\"stock-type\"]"),
+            Title = await GetCarListDetailBySelector(browser, singleCarId, "h2[class=\"title\"]"),
+            Mileage = await GetCarListDetailBySelector(browser, singleCarId, "div[class=\"mileage\"]"),
+            Price = await GetCarListDetailBySelector(browser, singleCarId, "span[class=\"primary-price\"]"),
             DealBadge = dealBadge,
             Dealer = new DealerDto()
             {
@@ -455,6 +454,27 @@ internal class Program
         };
 
         return result;
+    }
+
+    private static async Task<string> GetCarListDetailBySelector(ChromiumWebBrowser browser, string carId, string selector, bool isAttribute = false, string attributeName = null)
+    {
+        var script = $"document.querySelector('div[id=\"{carId}\"]').querySelector('{selector}').";
+        if (isAttribute && attributeName != null)
+        {
+            script += $"getAttribute(\"{attributeName}\")";
+        }
+        else
+        {
+            script += "textContent";
+        }
+
+        var carListDetailRequest = await browser.EvaluateScriptAsync($"(function() {{ return {script}; }})();");
+        if (carListDetailRequest.Success && carListDetailRequest.Result != null)
+        {
+            var response = ClearUnwantedCharacters(Convert.ToString(carListDetailRequest.Result));
+            return response;
+        }
+        return string.Empty;
     }
 
     /// <summary>
