@@ -80,7 +80,6 @@ internal class Program
     private static async Task FilterForModelX(ChromiumWebBrowser browser)
     {
         //TODO: refactor this method...
-        await browser.WaitForInitialLoadAsync();
         await browser.LoadUrlAsync(_searchResultUri);
         await browser.WaitForInitialLoadAsync();
 
@@ -281,6 +280,11 @@ internal class Program
         return new();
     }
 
+    /// <summary>
+    /// In specific car uri, there is a this part in end of the Feature section, retrive if there is data
+    /// </summary>
+    /// <param name="browser"></param>
+    /// <returns></returns>
     private static async Task<List<string>> ExtractCarFeatureAdditionalData(ChromiumWebBrowser browser)
     {
         var fetchCarBasicInfo = await browser.EvaluateScriptAsync("(function() { return documentdocument.getElementsByClassName('auto-corrected-feature-list')[0].textContent; })();");
