@@ -38,7 +38,7 @@ internal class Program
             //Set site uri
             HandleCarListRead.SetSiteUri(siteUri);
 
-            //ONURCAN
+            //Set filters from filter section
             await HandleFiltering.SelectFiltersAndClickSearchButton(browser);
 
             //All Tesla's without model filter
